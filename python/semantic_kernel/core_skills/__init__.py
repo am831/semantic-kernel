@@ -10,7 +10,7 @@ from semantic_kernel.core_skills.text_memory_skill import TextMemorySkill
 from semantic_kernel.core_skills.text_skill import TextSkill
 from semantic_kernel.core_skills.time_skill import TimeSkill
 from semantic_kernel.core_skills.web_search_engine_skill import WebSearchEngineSkill
-from semantic_kernel.core_skills.structured_data_skill import StructuredDataSkill
+from semantic_kernel.core_skills.data_skill import DataSkill
 
 __all__ = [
     "TextMemorySkill",
@@ -21,5 +21,5 @@ __all__ = [
     "ConversationSummarySkill",
     "MathSkill",
     "WebSearchEngineSkill",
-    "StructuredDataSkill"
+    "DataSkill"
 ]

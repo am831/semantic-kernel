@@ -5,7 +5,7 @@ import pandas as pd
 from semantic_kernel.skill_definition import sk_function, sk_function_context_parameter
 
 
-class StructuredDataSkill:
+class DataSkill:
     """
     Description: A skill that converts structured data to a format an LLM can
     read. Allows the user to perform natural language queries on structured 
@@ -26,14 +26,14 @@ class StructuredDataSkill:
         self._json = self._dataframe.to_json()
 
     @staticmethod
-    def from_csv(path: str) -> "StructuredDataSkill":
-        return StructuredDataSkill(
+    def from_csv(path: str) -> "DataSkill":
+        return DataSkill(
             dataframe=pd.read_csv(path)
         )
     
     @staticmethod
-    def from_json(json: str) -> "StructuredDataSkill":
-        return StructuredDataSkill(
+    def from_json(json: str) -> "DataSkill":
+        return DataSkill(
             dataframe=pd.read_json(json)
         )
 

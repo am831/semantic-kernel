@@ -3,7 +3,7 @@
 
 import semantic_kernel as sk
 import semantic_kernel.connectors.ai.open_ai as sk_oai
-from semantic_kernel.core_skills import StructuredDataSkill
+from semantic_kernel.core_skills import DataSkill
 import asyncio
 import pandas as pd
 
@@ -20,7 +20,7 @@ async def main() -> None:
     'Salary': [60000, 75000, 52000, 48000, 67000]
      }
     df = pd.DataFrame(data)
-    data_skill = kernel.import_skill(StructuredDataSkill(df), skill_name="data")
+    data_skill = kernel.import_skill(DataSkill(df), skill_name="data")
     get_pandas_df = data_skill["getPandasDF"]
     json = await get_pandas_df.invoke_async(df)
     context = sk.ContextVariables()
