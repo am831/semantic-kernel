@@ -17,6 +17,30 @@ class StructuredDataSkill:
 
     """
 
+    _dataframe: "pd.DataFrame"
+    _json: str
+
+    def __init__(self, dataframe: pd.DataFrame) -> None:
+        """"
+        Initializes from a Pandas DataFrame. See from_csv() and from_json() for 
+        more ways to initialize.
+        """
+        self._dataframe = dataframe
+        self._json = self._dataframe.to_json()
+
+    @staticmethod
+    def from_csv(path: str) -> "StructuredDataSkill":
+        return StructuredDataSkill(
+            dataframe=pd.read_csv(path)
+        )
+    
+    @staticmethod
+    def from_json(json: str) -> "StructuredDataSkill":
+        return StructuredDataSkill(
+            dataframe=pd.read_json(json)
+        )
+
+
     @sk_function(
             description="Converts a CSV file to a JSON object",
             name="getCSV",
