@@ -24,7 +24,7 @@ class DataSkill:
         """
         self._dataframe = dataframe
         self._json = self._dataframe.to_json()
-
+    
     @staticmethod
     def from_csv(path: str) -> "DataSkill":
         return DataSkill(
@@ -36,16 +36,8 @@ class DataSkill:
         return DataSkill(
             dataframe=pd.read_json(json)
         )
-
-    @sk_function(
-            description="Converts a CSV file to a JSON object",
-            name="getCSV",
-            input_description="Path of the csv file",
-    )
-    @sk_function_context_parameter(
-        name="CSV",
-        description="CSV to JSON",
-    )
+    
+    @staticmethod
     async def get_csv(self, path: str) -> str:
         """
         Returns the csv file as a json object.
@@ -53,18 +45,12 @@ class DataSkill:
         :param path: path to the csv file
         :return: json object
         """
+        prompt = """You are an agent designed to interact with JSON. 
+        Your goal is to return a final answer by interacting with the JSON."""
         data = pd.read_csv(path).to_json(orient='records')
-        return json.dumps(data)
+        return prompt + "\n" + json.dumps(data)
     
-    @sk_function(
-        description="Converts a pandas dataframe to a JSON object",
-        name="getPandasDF",
-        input_description="Pandas dataframe",
-    )
-    @sk_function_context_parameter(
-        name="PandasDF",
-        description="Pandas dataframe to JSON",
-    )
+    @staticmethod
     async def get_pandas_df(self, data: pd.DataFrame) -> str:
         """
         Returns the pandas dataframe as a json object.
@@ -72,5 +58,10 @@ class DataSkill:
         :param data: pandas dataframe
         :return: json object
         """
+        prompt = """You are an agent designed to interact with JSON. 
+        Your goal is to return a final answer by interacting with the JSON."""
         data = data.to_json(orient='records')
-        return json.dumps(data)
+        jsonstr = json.dumps(data)
+        jsonstr = jsonstr[1:-1]
+        return prompt + jsonstr
+    
